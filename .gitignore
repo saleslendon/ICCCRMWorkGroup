@@ -1,0 +1,11 @@
+/ICWorkGroupCustomization/ICWorkGroupCustomization/bin
+/ICWorkGroupCustomization/ICWorkGroupCustomization/obj
+/ICWorkGroupCustomization/openspec
+/ICWorkGroupCustomization/ICWorkGroupCustomization/Properties
+*.bat
+*.lnk
+/ICWorkGroupCustomization/.github
+/ICWorkGroupCustomization/.vs
+/ICWorkGroupCustomization/.vscode
+*.txt
+/ICWorkGroupCustomization/ICWorkGroupCustomization/.vs
