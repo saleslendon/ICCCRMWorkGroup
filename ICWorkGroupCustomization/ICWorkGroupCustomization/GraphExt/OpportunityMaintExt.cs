@@ -12,7 +12,20 @@ namespace ICWorkGroupCustomization.GraphExt
         #region Messages
         public const string DuplicateBAccountWarning = "A duplicate of the Business Account exists in an Open Opportunity";
         public const string DuplicateBAccountError = "Please select a different Business Account. A duplicate of the Business Account exists in an Open Opportunity";
+        public const string BAccountWorkgroupError = "Business Account '{0}' is not assigned to the workgroup of this Opportunity.";
         #endregion
+
+        /// <summary>
+        /// When the Opportunity Class has "Restrict by Workgroup" ticked, only Business Accounts
+        /// whose CRM Info workgroup matches the Opportunity's workgroup can be selected.
+        /// </summary>
+        [PXMergeAttributes(Method = MergeMethod.Append)]
+        [PXRestrictor(typeof(Where<BAccount.workgroupID, Equal<Current<CROpportunity.workgroupID>>,
+            Or<NotExists<Select<CROpportunityClass,
+                Where<CROpportunityClass.cROpportunityClassID, Equal<Current<CROpportunity.classID>>,
+                    And<ICCROpportunityClassExt.usrICRestrictByWorkgroup, Equal<True>>>>>>>),
+            BAccountWorkgroupError, typeof(BAccount.acctCD))]
+        protected virtual void _(Events.CacheAttached<CROpportunity.bAccountID> e) { }
 
         protected virtual void _(Events.RowSelected<CROpportunity> e)
         {
